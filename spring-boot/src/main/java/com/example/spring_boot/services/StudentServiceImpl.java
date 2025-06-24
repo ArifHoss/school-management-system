@@ -25,10 +25,14 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public Student update(Long id, Student student) {
-        Student foundStudent = studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("STUDENT NOT FOUND"));
+        Student foundStudent = getStudentById(id);
         foundStudent.setName(student.getName());
         foundStudent.setEmail(student.getEmail());
         return studentRepository.save(foundStudent);
+    }
+
+    private Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("STUDENT NOT FOUND"));
     }
 
     @Override
