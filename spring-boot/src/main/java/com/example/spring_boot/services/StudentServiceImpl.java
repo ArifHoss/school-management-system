@@ -24,11 +24,17 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public Student update(Long id, Student student) {
-        Student foundStudent = getStudentById(id);
-        foundStudent.setName(student.getName());
-        foundStudent.setEmail(student.getEmail());
-        return studentRepository.save(foundStudent);
+    public Student update(Long id, Student newStudent) {
+        Student student = getStudentById(id);
+
+        if (newStudent.getName() != null) {
+            student.setName(newStudent.getName());
+        }
+
+        if (newStudent.getEmail() != null) {
+            student.setEmail(newStudent.getEmail());
+        }
+        return studentRepository.save(student);
     }
 
     private Student getStudentById(Long id) {

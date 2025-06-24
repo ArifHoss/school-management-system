@@ -26,8 +26,15 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course update(Long id, Course newCourse) {
         Course course = getCourse(id);
-        course.setTitle(newCourse.getTitle());
-        course.setDescription(newCourse.getDescription());
+
+        if (newCourse.getTitle() != null) {
+            course.setTitle(newCourse.getTitle());
+        }
+
+        if (newCourse.getDescription() != null) {
+            course.setDescription(newCourse.getDescription());
+        }
+
         return courseRepository.save(course);
     }
 
